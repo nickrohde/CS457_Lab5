@@ -1,0 +1,270 @@
+\documentclass{article}
+
+% !TeX spellcheck = en_US 
+
+\title{CS457 Project 5}
+\author{Nick Rohde}
+\date{31$^{st}$ May 2018}
+
+\usepackage{subcaption}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage[labelfont=bf]{caption}
+\usepackage{mathbbol}
+\usepackage{float}
+
+\hypersetup
+{
+	colorlinks=true,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=blue,
+	linktoc=all,
+	linkcolor=blue,
+}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\pagebreak
+
+\section{Introduction} \label{S1}
+	For this project, we compared three different classifiers in an image recognition problem. The three classifiers we used for this were the Multilayer Perceptron (MLP), the Radial Basis Function, and a Support Vector Machine (SVM). TODO \\
+
+
+
+\section{Experimentation} \label{S2}
+	In this section, we will briefly discuss the experimentation that was done with the parameters of each of the three classifiers. The decisions discussed here were used to generate the data displayed in \hyperref[S5]{Section 5} and discussed in \hyperref[S4]{Section 5}
+	
+	\subsection{MLP}
+		Experiments with the MLP involved three variables, namely, number of hidden layer, number of nodes in each layer, and learning rate. We will briefly discuss each one of these and present the final values of each.\\
+		
+		During the experiments it became clear that the number of hidden layers has a very strong effect on the results of the classifier. The MLP was tested with one, two, and three hidden layers, which showed that having a single layer is the best solution. With a single layer, the network was able to reach accuracy of 95\%+, whereas with two and three layers the network did horribly, achieving under 25\% for most tests. Thus, the final number of hidden layers was set to one.\\
+		
+		The number of hidden neurons was much more interesting than the layers. With 5 hidden neurons, the network was already able to achieve more than 95\% accuracy, however, with six and seven it still increased in accuracy. After that, though, it started to decay, with 8 hidden neurons, we only managed to achieve a 87\% accuracy, and it went downhill from there with more neurons. The final number of hidden neurons was set to seven, as this managed to get the highest accuracy of 98.5\%.\\
+		
+		Finally, the learning rate was also quite interesting. Unsurprisingly, the optimal learning rate was 0.4, exactly the same as in the previous project where we classified 4x4 pixel images. It is worth noting that very high learning rates also managed to classify the images well, namely, 0.95 achieved a 97\% accuracy, but that was not enough to beat the 98.5\% of 0.4.\\
+	
+
+\pagebreak
+\section{Analysis}\label{S3}
+	In this section, we will briefly discuss the overall TODO, and then examine the \hyperref[S5]{Data}.\\
+	
+	\subsection{Overview}
+		TODO \\
+
+	
+	\subsection{Conclusions}
+		TODO \\
+	
+\section{Implementation}\label{S4}
+	All tests were run using the WEKA implementations of the MLP (weka.functions.MultilayerPerceptron), the RBF (weka.functions.RBFNetwork) and the SVM (weka.functions.SMO). The test samples were generated using a python script which is included. \\
+
+\pagebreak
+\section{Data} \label{S5}
+	This section displays the numerical data from the experimentation, discussed in the \hyperref[S3]{Analysis section}.\\
+
+	\subsection{Overview}\label{S51}
+		For all data in this section, the same test samples were used. The samples were randomly generated from the prototypes displayed in \hyperref[S6]{Section 6}; the prototype was duplicated and then max\_noise \% bits in the vector were flipped. Due to the randomness, it is possible for duplicates to have been generated as this was not checked for, thus, it is possible that the numbers in the confusion matrices may not add up 100\%.\\
+		The confusion matrices show correct identifications down the main diagonal; the columns represent the category the classifier returned, and the rows are the expected output (e.g.: index (7,4) means it was identified as class 7 (G), but was actually class 4 (D)).
+		
+		\subsection{MLP}
+			This section displays the test results for the MLP. First, the configurations are shown for the three networks, followed by the confusion matrices and final errors during testing.
+		
+			\subsubsection{MLP Configuration}
+				\begin{minipage}{\linewidth}
+					\centering
+					\begin{tabular}{c|cc|ccc}\label{ResVary}
+						Set Number 	&	n\_samples	& max\_noise & \# of Hidden Layers 	& Nodes Per Layer 	& Learning Rate \\
+						\hline
+						1			&	20 			&	20\%	 &  TBD 			 	&	TBD				& TBD \\
+						2			&	50			&	4\%		 &  TBD				 	&	TBD				& TBD \\
+						3			&	100			&	10\%	 &  1 			 		&	7				& 0.95 \\
+					\end{tabular}
+				\end{minipage}
+			
+			\subsubsection{Classifier Accuracy}
+				\[
+				Confusion~Matrix_{1} = 
+				\begin{bmatrix}
+				&1&1&1&&&\\
+				&1&&&1&&\\
+				&1&&&1&&\\
+				&1&1&1&&&\\
+				&1&&&1&&\\
+				&1&&&1&&\\
+				&1&1&1&&&
+				\end{bmatrix}
+				\]
+				\[
+				Confusion~Matrix_{2} = 
+				\begin{bmatrix}
+				&1&1&1&&&\\
+				&1&&&1&&\\
+				&1&&&1&&\\
+				&1&1&1&&&\\
+				&1&&&1&&\\
+				&1&&&1&&\\
+				&1&1&1&&&
+				\end{bmatrix}
+				\]
+				\[
+				Confusion~Matrix_{3} = 
+				\begin{bmatrix}
+				36& 0& 0& 0& 0 &0 & 0 & 0 & 0 & 0\\
+				0& 40&  0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+				0&  0& 32&  0&  5&  0 & 0 & 0 & 0 & 0\\
+				0 & 0 & 0 &35  &0 & 0&  0&  0&  0&  0\\
+				0 & 0 & 2 & 0 &35&  0 & 0 & 0 & 0 & 0\\
+				0 & 0 & 0 & 0 & 1 &43&  0&  0&  0&  0\\
+				0 & 0 & 1 & 0 & 0 & 0 &40&  0&  0&  0\\
+				0 & 0&  0&  0&  0 & 0 & 0 &43 & 0 & 0\\
+				0 & 0 & 1 & 0 & 0 & 0&  0&  0& 46 & 0\\
+				0 & 0&  0&  0&  0&  0&  0&  0&  0& 40
+				\end{bmatrix}
+				\]
+				\linebreak
+				
+				\begin{minipage}{\linewidth}
+					\centering
+					\begin{tabular}{c|cc}\label{ResVary}
+						Set Number 	& \# Correctly Identified	& Relative Absolute Error (\%) \\
+						\hline
+						1			&  TBD 			 			&	TBD						 \\
+						2			&  TBD				 		&	TBD						 \\ 
+						3			&  391 (of 400)		 		&	6.48					 \\
+					\end{tabular}
+				\end{minipage}
+				
+		\subsection{RBF}
+			This section displays the test results for the RBF. First, the configurations are shown for the three networks, followed by the confusion matrices and final errors during testing.
+		
+			\subsubsection{RBF Configuration}
+			\subsubsection{Classifier Accuracy}	
+		
+		\subsection{SVM}
+			This section displays the test results for the SVM. First, the configurations are shown for the three support vector machines, followed by the confusion matrices and final errors during testing.
+			\subsubsection{SVM Configuration}
+			\subsubsection{Classifier Accuracy}
+	
+	\section{Prototypes}\label{S6}
+	The following matrices were used as prototypes for generating the samples for each of the 3 strategies in discussed above. The matrices were converted into vectors for training by appending the rows together. In the matrices below, the blank spaces represent 0s, they have been omitted to make the letters easier to see. 
+	
+	\[
+	A = 
+	\begin{bmatrix}
+	&&1&1&1&&\\
+	&&1&&1&&\\
+	&1&&&&1&\\
+	&1&1&1&1&1&\\
+	1&&&&&&1\\
+	1&&&&&&1\\
+	1&&&&&&1
+	\end{bmatrix}
+	~B = 
+	\begin{bmatrix}
+	&1&1&1&&&\\
+	&1&&&1&&\\
+	&1&&&1&&\\
+	&1&1&1&&&\\
+	&1&&&1&&\\
+	&1&&&1&&\\
+	&1&1&1&&&
+	\end{bmatrix}
+	~C = 
+	\begin{bmatrix}
+	&1&1&1&1&1&\\
+	&1&&&&&\\
+	&1&&&&&\\
+	&1&&&&&\\
+	&1&&&&&\\
+	&1&&&&&\\
+	&1&1&1&1&1&
+	\end{bmatrix}
+	~D = 
+	\begin{bmatrix}
+	&1&1&1&1&&\\
+	&1&&&&1&\\
+	&1&&&&&1\\
+	&1&&&&&1\\
+	&1&&&&&1\\
+	&1&&&&1&\\
+	&1&1&1&1&&
+	\end{bmatrix}
+	\]
+	\[
+	E = 
+	\begin{bmatrix}
+	&1&1&1&1&1&\\
+	&1&&&&&\\
+	&1&&&&&\\
+	&1&1&1&&&\\
+	&1&&&&&\\
+	&1&&&&&\\
+	&1&1&1&1&1&
+	\end{bmatrix}
+	~F = 
+	\begin{bmatrix}
+	&&1&1&1&1&\\
+	&&1&&&&\\
+	&&1&&&&\\
+	&&1&1&1&&\\
+	&&1&&&&\\
+	&&1&&&&\\
+	&&1&&&&
+	\end{bmatrix}
+	~G = 
+	\begin{bmatrix}
+	&1&1&1&1&1&\\
+	&1&&&&&\\
+	&1&&&&&\\
+	&1&&1&1&1&\\
+	&1&&&&1&\\
+	&1&&&&1&\\
+	&1&1&1&1&1&
+	\end{bmatrix}
+	~H = 
+	\begin{bmatrix}
+	&1&&&&1&\\
+	&1&&&&1&\\
+	&1&&&&1&\\
+	&1&1&1&1&1&\\
+	&1&&&&1&\\
+	&1&&&&1&\\
+	&1&&&&1&
+	\end{bmatrix}
+	\]
+	\[
+	I = 
+	\begin{bmatrix}
+	&&1&1&1&&\\
+	&&&1&&&\\
+	&&&1&&&\\
+	&&&1&&&\\
+	&&&1&&&\\
+	&&&1&&&\\
+	&&1&1&1&&
+	\end{bmatrix}
+	~J = 
+	\begin{bmatrix}
+	&1&1&1&1&&\\
+	&&&&1&&\\
+	&&&&1&&\\
+	&&&&1&&\\
+	&&&&1&&\\
+	&1&&&1&&\\
+	&&1&1&&&
+	\end{bmatrix}
+	\]
+
+		
+
+
+\end{document}

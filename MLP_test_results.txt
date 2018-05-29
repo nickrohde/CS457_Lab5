@@ -1,0 +1,4 @@
+Set1:
+	# of Hidden Layers: 1
+	# of Nodes: (1,7)
+	Best Learn Rate: 0.95
