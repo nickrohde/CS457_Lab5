@@ -2,7 +2,7 @@ Set1:
 	# of Hidden Layers: 1
 	# of Nodes: (1,7)
 	Best Learn Rate: 0.4
-	Accuracy: 97.5
+	Accuracy: 97.75
 
 Set2:
 	# of Hidden Layers: 1
