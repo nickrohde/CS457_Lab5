@@ -1,0 +1,42 @@
+Set1:
+	c: 1.0 
+	epsilon: 1e-12
+	normilization/standardization: none
+	kernel: 
+		Kind: NormalizedPolyKernel
+		cache size: 250007
+		exponent: 2.0
+	number of folds: -1
+	random seed: 1
+	tolerance: 0.001
+	Accuracy: 98.75%
+	correct: 395/400
+
+
+Set2:
+	c: 0.9 
+	epsilon: 1e-12
+	normilization/standardization: standardize data
+	kernel: 
+		Kind: PolyKernel
+		cache size: 250007
+		exponent: 1.0
+	number of folds: -1
+	random seed: 1
+	tolerance: 0.001
+	accuracy: 99.5%
+	correct: 199/200
+
+
+Set3:
+	c: 2.0 
+	epsilon: 1e-12
+	normilization/standardization: none
+	kernel: PolyKernel
+		cache size: 250007
+		exponent: 2.5
+	number of folds: -1
+	random seed: 1
+	tolerance: 0.001
+	accuracy: 85%
+	correct:68/80

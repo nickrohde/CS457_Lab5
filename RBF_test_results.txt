@@ -1,0 +1,29 @@
+Set1:
+	clustering seed: 1
+	max iterations: inf
+	min std deviation: 1.42
+	number of clusters: 10
+	ridge: 1e-8
+	accuracy: 98.5%
+	correct: 394/400
+
+
+Set2:
+	clustering seed: 1
+	max iterations: inf
+	min std deviation: 1.42
+	number of clusters: 10
+	ridge: 1e-8
+	accuracy: 99%
+	correct: 198/200
+
+
+Set3:
+
+	clustering seed: 1
+	max iterations: inf
+	min std deviation: 1.4
+	number of clusters: 2
+	ridge: 1e-9
+	accuracy: 78.75%
+	correct: 63/80
